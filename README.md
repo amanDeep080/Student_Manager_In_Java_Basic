@@ -5,7 +5,7 @@ Spring Boot + JDBC + PostgreSQL + Frontend
 
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Poppins&weight=700&size=26&duration=2500&pause=700&color=22C55E&center=true&vCenter=true&width=900&lines=Student+Manager+%F0%9F%8E%93;Spring+Boot+%2B+JDBC+%2B+PostgreSQL+%2B+Frontend;Add+%2F+View+%2F+Delete+Students+in+Seconds" alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com?font=Poppins&weight=700&size=26&duration=2500&pause=700&color=22C55E&center=true&vCenter=true&width=900&lines=Student+Manager+%F0%9F%8E%93;Spring+Boot+%2B+JDBC+%2B+PostgreSQL+%2B+Frontend;Add+%2F+View+%2F+Delete+Students+in+Seconds" />
 
 <br/>
 
@@ -17,30 +17,40 @@ Spring Boot + JDBC + PostgreSQL + Frontend
 
 <br/><br/>
 
-> A beginner-friendly **full-stack** project where the frontend (HTML/JS) calls Spring Boot REST APIs using **JDBC + PostgreSQL**.
+> A beginner-friendly full-stack project where frontend (HTML/JS) connects to Spring Boot REST APIs using JDBC + PostgreSQL.
 
 </div>
 
 ---
 
-## ✨ Features
-- ✅ Add Student (Name, Email, Course)
+# ✨ Features
+
+- ✅ Add Student
 - ✅ View All Students
 - ✅ Delete Student
-- ✅ Frontend UI included (no separate React setup)
+- ✅ REST API
+- ✅ PostgreSQL Integration
+- ✅ Frontend UI included
 
 ---
 
-## 🧰 Tech Stack
-- **Backend:** Spring Boot (REST API)
-- **Database:** PostgreSQL
-- **DB Access:** JdbcTemplate (JDBC)
-- **Frontend:** HTML + CSS + JavaScript (`fetch()`)
+# 🧰 Tech Stack
 
+Backend:
+- Spring Boot
+- JdbcTemplate
+- PostgreSQL
 
+Frontend:
+- HTML
+- CSS
+- JavaScript (Fetch API)
 
-## 📁 Project Structure
+---
 
+# 📁 Project Structure
+
+```
 student-manager/
  ├─ src/main/java/com/example/demo/
  │   ├─ StudentManagerApplication.java
@@ -55,177 +65,222 @@ student-manager/
  │   │   └─ app.js
  │   └─ application.properties
  └─ pom.xml
+```
 
- ✅ Requirements
+---
 
-Java 17+ (works with Java 21 too)
+# ✅ Requirements
 
-Maven
+- Java 17+
+- Maven
+- PostgreSQL installed & running
+- Eclipse / IntelliJ
 
-PostgreSQL installed + running
+---
 
-Any IDE (Eclipse / IntelliJ / VS Code)
+# 🗄️ Database Setup (PostgreSQL)
 
-🗄️ Database Setup (PostgreSQL)
-1) Create Table (run in pgAdmin / psql)
+Open pgAdmin → Query Tool → Run:
+
+```sql
 CREATE TABLE IF NOT EXISTS students (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(120) NOT NULL UNIQUE,
     course VARCHAR(100) NOT NULL
 );
-2) Configure Spring Boot DB Connection
+```
 
-Open: src/main/resources/application.properties and set your password:
+---
 
+# ⚙️ Configure Database
+
+Open:
+
+```
+src/main/resources/application.properties
+```
+
+Set:
+
+```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
 spring.datasource.username=postgres
 spring.datasource.password=YOUR_PASSWORD
+```
 
-⚠️ Tip: If you created a different database (example: student_db), update the URL:
+If using different DB:
 
+```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/student_db
-▶️ Run the Project
-Option A: Run from Eclipse
+```
 
-Right click project → Run As → Spring Boot App
+---
 
-App starts on:
+# ▶️ Run the Application
 
-✅ http://localhost:8080
+## From Eclipse
+Right Click Project → Run As → Spring Boot App
 
-Option B: Run from Terminal
+## From Terminal
 
-In project root:
-
+```bash
 mvn spring-boot:run
-🌐 Open Frontend (UI)
+```
 
-After backend starts, open:
+Server starts at:
 
-✅ Frontend URL:
-➡️ http://localhost:8080/index.html
+```
+http://localhost:8080
+```
 
-🔥 API Testing (No Confusion)
-✅ 1) Get All Students
+---
+
+# 🌐 Open Frontend
+
+```
+http://localhost:8080/index.html
+```
+
+---
+
+# 🔥 API Testing Guide
+
+## 1️⃣ Get All Students
 
 GET
 
+```
 http://localhost:8080/api/students
+```
 
-cURL
+cURL:
 
+```bash
 curl http://localhost:8080/api/students
-✅ 2) Add Student
+```
+
+---
+
+## 2️⃣ Add Student
 
 POST
 
+```
 http://localhost:8080/api/students
+```
 
-Body (JSON)
+Body:
 
+```json
 {
   "name": "Amandeep",
   "email": "aman@gmail.com",
   "course": "Java"
 }
+```
 
-cURL
+cURL:
 
+```bash
 curl -X POST http://localhost:8080/api/students \
   -H "Content-Type: application/json" \
   -d "{\"name\":\"Amandeep\",\"email\":\"aman@gmail.com\",\"course\":\"Java\"}"
-✅ 3) Delete Student
+```
+
+---
+
+## 3️⃣ Delete Student
 
 DELETE
 
+```
 http://localhost:8080/api/students/{id}
+```
 
 Example:
 
+```
 http://localhost:8080/api/students/3
+```
 
-cURL
+cURL:
 
+```bash
 curl -X DELETE http://localhost:8080/api/students/3
-🧪 Verify in PostgreSQL (Optional)
+```
 
-Run:
+---
 
+# 🧪 Verify Data in PostgreSQL
+
+```sql
 SELECT * FROM students ORDER BY id DESC;
-🛠️ Common Issues + Fixes (So No One Gets Stuck)
-❌ 1) “Connection refused” / DB not connecting
+```
 
-✅ Fix:
+---
 
-Start PostgreSQL service
+# 🛠️ Common Issues + Fix
 
-Check port 5432
+## ❌ Database not connecting
+- Ensure PostgreSQL is running
+- Check port 5432
+- Check username/password
 
-Confirm username/password in application.properties
+## ❌ Port 8080 already in use
 
-❌ 2) Port 8080 already in use
+Change port:
 
-✅ Fix:
-Change port in application.properties:
-
+```properties
 server.port=8081
+```
 
-Then open frontend:
+Then open:
 
+```
 http://localhost:8081/index.html
+```
 
-❌ 3) Tests show red errors but app runs
+## ❌ Test errors but app runs
 
-✅ Fix:
-Add this dependency in pom.xml (tests):
+Add in pom.xml:
 
+```xml
 <dependency>
   <groupId>org.springframework.boot</groupId>
   <artifactId>spring-boot-starter-test</artifactId>
   <scope>test</scope>
 </dependency>
+```
 
-Then in Eclipse:
+Then:
+- Maven → Update Project
+- Project → Clean
 
-Right click project → Maven → Update Project
+Or delete `src/test/java` folder.
 
-Project → Clean
+---
 
-(Or delete src/test/java if you don’t want tests.)
+# 🚀 Future Improvements
 
-📸 Screenshots (Optional but recommended)
+- Update Student
+- Validation
+- Search
+- Pagination
+- Login System
+- Bootstrap UI
 
-Create a folder screenshots/ and add:
+---
 
-screenshots/ui.png
+# 👨‍💻 Author
 
-screenshots/postman.png
-
-Then add in README:
-
-![UI](screenshots/ui.png)
-![Postman](screenshots/postman.png)
-🚀 Future Improvements (Optional)
-
-Update Student (PUT)
-
-Validation (NotBlank, Email)
-
-Search by name
-
-Pagination
-
-Login system
-
-Bootstrap UI
-
-👤 Author
-
-Amandeep Kumar
-
+Amandeep Kumar  
 Project: Student Manager
 
+---
+
 <div align="center">
+
 ⭐ If you like this project, give it a star ⭐
-<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTRhM2M0YTY2YjE0ZDE0NzA3N2I1Y2U4Y2M3NjE5N2UxYjY0N2E1MSZjdD1n/26ufdipQqU2lhNA4g/giphy.gif" width="420"/> </div>
+
+</div>
